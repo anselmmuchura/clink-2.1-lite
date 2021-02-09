@@ -235,7 +235,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f4" green="f4" red="f4" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Clink studybay bot v2.1 lite - Bid"/>
+                <Property name="text" type="java.lang.String" value="Clink studybay bot v2.1 lite - bid"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnExit1">

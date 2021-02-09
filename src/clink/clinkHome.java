@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 
 public class clinkHome extends javax.swing.JFrame {
@@ -183,7 +184,7 @@ public class clinkHome extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(244, 244, 244));
-        jLabel4.setText("Clink studybay bot v2.1 lite - Bid");
+        jLabel4.setText("Clink studybay bot v2.1 lite - bid");
 
         btnExit1.setBackground(new java.awt.Color(28, 39, 84));
         btnExit1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -379,36 +380,18 @@ public class clinkHome extends javax.swing.JFrame {
 
     protected void clink() throws InterruptedException, IOException{
 //        System.setProperty("webdriver.chrome.driver", "chromedriver");
+//        System.setProperty("WebDriver.gecko.driver","geckodriver.exe");
         System.setProperty("webdriver.chrome.driver", "drv.exe");
 
     //removes chrome default test notification
     ChromeOptions options = new ChromeOptions();
     options.setExperimentalOption("useAutomationExtension", false);
     options.setExperimentalOption("excludeSwitches",Collections.singletonList("enable-automation"));   
-    //options.addArguments("--headless");
+//    options.addArguments("--headless");
     displayLog.append("Opening browser...\n");
     //driver instance created
     driver = new ChromeDriver(options);
-    
-    //get filter subjects
-    String filter=Config.readFile("filter.txt");
-     String [] filterArray=filter.split(",");
-     
-     int i=0;
-     while(i<filterArray.length){
-         filterArray[i]=filterArray[i].toLowerCase();
-         System.out.println(filterArray[i]);
-         i++;
-     }
-
-     
-//    if(filter.isEmpty()){
-//      filterArray.toString();
-//
-//    }else{
-//       filterArray=filter.split(",");
-//    }
-    //System.out.println(filterArray[0]+filterArray[1]+filterArray[2]+filterArray[3]+filterArray[4]+filterArray[5]);
+//    driver=new FirefoxDriver(options);
     
     //get config from file
     Config conf=new Config();
@@ -420,7 +403,6 @@ public class clinkHome extends javax.swing.JFrame {
      //configs
      String priceLevel=configArray[0];
      int delay=Integer.parseInt(configArray[1]);
-     Boolean refreshAfterBid=Boolean.parseBoolean(conf.readFile("rfresh.txt"));
    
          
      displayLog.append("Signing in...\n");
@@ -456,7 +438,7 @@ public class clinkHome extends javax.swing.JFrame {
                 if (status == 1) {
                    displayLog.append("login successful...\n");
                    displayLog.append("bidding...\n");
-                   Bot.bid(driver, delay, priceLevel, refreshAfterBid, filterArray, displayLog);
+                   Bot.bid(driver, delay, priceLevel);
                } else {
                     displayLog.append("ERROR,this activation belongs to another user...\n");
                 }

@@ -1,1 +1,1 @@
-None, 30, All
+None, 1, All

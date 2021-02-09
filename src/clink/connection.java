@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class connection {
     public static Connection getConnection(){
-      
+     
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

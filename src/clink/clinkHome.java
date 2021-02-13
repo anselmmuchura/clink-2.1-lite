@@ -379,9 +379,9 @@ public class clinkHome extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MousePressed
 
     protected void clink() throws InterruptedException, IOException{
-//        System.setProperty("webdriver.chrome.driver", "chromedriver");
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
 //        System.setProperty("WebDriver.gecko.driver","geckodriver.exe");
-        System.setProperty("webdriver.chrome.driver", "drv.exe");
+//        System.setProperty("webdriver.chrome.driver", "drv.exe");
 
     //removes chrome default test notification
     ChromeOptions options = new ChromeOptions();

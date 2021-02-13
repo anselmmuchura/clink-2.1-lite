@@ -34,16 +34,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Bot{
     static String minPrice,maxPrice,avPrice; 
     static boolean isLoggedIn, isClosed=false;
-   //count number of available orders
-   static int availableOrders(WebDriver driver){
-       
-        WebDriverWait waitForOrderCount=new WebDriverWait(driver,100);
-        WebElement foundOrders=waitForOrderCount.until(ExpectedConditions.visibilityOfElementLocated(By.className("irbJoc")));
-        String foundOrdersString=foundOrders.getText();
-        String[] foundArray=foundOrdersString.split(" ");
-        int numberOfOrders = Integer.parseInt(foundArray[1]);
-       return numberOfOrders;
-   } 
+
    public static JSONArray selectors(){
        try {
            URL url = new URL("https://sb.clink.co.ke/getElements.php");
@@ -121,14 +112,13 @@ public class Bot{
         
         //*if no new order,wait before refresh
         if(orders.size()<=0){
-         driver.manage().timeouts().implicitlyWait(delay, TimeUnit.SECONDS);
-         //order_list 
-         try{
-         orders=driver.findElements(By.xpath(jsonArray.getJSONObject(3).getString("locator")));
-         }catch(Exception e){}
+           driver.manage().timeouts().implicitlyWait(delay, TimeUnit.SECONDS);
+           orders=driver.findElements(By.xpath(jsonArray.getJSONObject(3).getString("locator")));
+
         }
       
         for(WebElement order:orders){
+            if(orders.isEmpty()){break;}
                 //more
                 try{
                     wait.until(ExpectedConditions.elementToBeClickable(By.xpath(jsonArray.getJSONObject(4).getString("locator")))).click();
@@ -193,17 +183,9 @@ public class Bot{
                         break;
                         }
                 //one bid per refresh   
-                            break;
+                        break;
         }
-                    //if its one bid per refresh
-                            try{
-                            List<WebElement>closeReads=waitKiasi.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(jsonArray.getJSONObject(16).getString("locator"))));
-                            for(WebElement closeRead:closeReads){
-                                closeRead.click();
-                            }
-                            }
-                            catch(Exception e){
-                            }
+                   
                          
         driver.navigate().refresh();
         }

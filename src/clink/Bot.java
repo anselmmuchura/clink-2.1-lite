@@ -114,7 +114,6 @@ public class Bot{
         if(orders.size()<=0){
            driver.manage().timeouts().implicitlyWait(delay, TimeUnit.SECONDS);
            orders=driver.findElements(By.xpath(jsonArray.getJSONObject(3).getString("locator")));
-
         }
       
         for(WebElement order:orders){
